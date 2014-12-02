@@ -40,8 +40,8 @@ const (
 
 	locationUpdateGeometrySQL = `
 		UPDATE locations SET
-			"point"=(SELECT ST_GeogFromWKB(ST_MakePoint("longitude","latitude")) FROM locations WHERE "id"=$1),
-			"polygon"=(SELECT ST_GeomFromEWKB(ST_Buffer(ST_GeogFromWKB(ST_MakePoint("longitude","latitude")), "accuracy")) FROM locations WHERE "id"=$1)
+			"point"=ST_GeogFromWKB(ST_MakePoint("longitude","latitude")),
+			"polygon"=ST_GeomFromEWKB(ST_Buffer(ST_GeogFromWKB(ST_MakePoint("longitude","latitude")), "accuracy"))
 		WHERE "id"=$1`
 
 	/*
